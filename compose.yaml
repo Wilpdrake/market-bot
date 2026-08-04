@@ -1,0 +1,16 @@
+services:
+  bot:
+    build:
+      context: .
+      target: production
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN is required}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    init: true
+    restart: unless-stopped
+    security_opt: ["no-new-privileges:true"]
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "3"
